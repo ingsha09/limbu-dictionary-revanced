@@ -1,18 +1,17 @@
 pluginManagement {
     repositories {
-        google()       // Store for Android tools
-        mavenCentral() // Store for Kotlin and other libraries
+        google()
+        mavenCentral()
         gradlePluginPortal()
     }
 }
-
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    // This line is the secret fix: it tells Gradle to use these repos first
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
     }
 }
-
 rootProject.name = "Limbu Dictionary"
 include ':app'
