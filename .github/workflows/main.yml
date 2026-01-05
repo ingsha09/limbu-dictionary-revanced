@@ -1,5 +1,7 @@
 name: Build Native APK
-on: [push]
+# This replaces 'on: [push]' so it ONLY runs when you click the button
+on: 
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,18 +15,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          # We use the v3 cache logic here to keep your builds fast
           cache: 'gradle'
 
-      # This is the "Magic" step for people without a PC
-      # It installs Gradle directly on the GitHub server so you don't need 'gradlew'
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.4
 
       - name: Build Debug APK
-        # We use 'gradle' instead of './gradlew' because we installed it above
         run: gradle assembleDebug
 
       - name: Upload APK
