@@ -5,16 +5,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: set up JDK 17
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+          # We use the v3 cache logic here to keep your builds fast
+          cache: 'gradle'
+
+      # This is the "Magic" step for people without a PC
+      # It installs Gradle directly on the GitHub server so you don't need 'gradlew'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.4
 
       - name: Build Debug APK
-        run: bash gradlew assembleDebug
+        # We use 'gradle' instead of './gradlew' because we installed it above
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
