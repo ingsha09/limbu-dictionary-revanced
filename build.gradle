@@ -1,12 +1,11 @@
-// Remove the buildscript and allprojects blocks that have repositories inside
 buildscript {
+    // DO NOT put a repositories {} block here
     dependencies {
         classpath 'com.android.tools.build:gradle:8.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10"
     }
 }
 
-// Keep this part if you have it, but do NOT put a "repositories" block here
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
