@@ -13,21 +13,60 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    
+    kotlinOptions {
+        jvmTarget = '17'
     }
 
     buildFeatures {
         compose true
     }
+
     composeOptions {
+        // This version must match the Kotlin version in your Root build.gradle
         kotlinCompilerExtensionVersion '1.4.3'
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
 dependencies {
+    // Core Android & Kotlin
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.activity:activity-compose:1.7.2'
+
+    // Jetpack Compose (Modern UI)
     implementation platform('androidx.compose:compose-bom:2023.05.01')
     implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    
+    // Material Design 3 (The "Nice Design" you wanted)
     implementation 'androidx.compose.material3:material3'
+
+    // JSON Parsing (For your data.json)
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
