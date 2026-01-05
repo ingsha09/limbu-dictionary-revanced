@@ -1,10 +1,11 @@
 pluginManagement {
     repositories {
-        google()
-        mavenCentral()
+        google()       // Store for Android tools
+        mavenCentral() // Store for Kotlin and other libraries
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,5 +13,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "Limbu Dictionary"
 include ':app'
